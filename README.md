@@ -9,7 +9,61 @@ install the most popular tools, so they can all work seamlessly, and at the same
 by default. If you want to know more, and really want to take advante of this devcontainer read
 below.
 
-There's also a minimized version under the `minimal` branch.
+## New DevContainer Wizard
+
+Check our tool to generate the recommended devcontainer configuration based on your needs:
+- https://github.com/theredguild/devcontainer-wizard
+
+## Available Devcontainer Variants
+
+We now offer multiple devcontainer configurations to suit different needs:
+
+### **Auditor** (`.devcontainer/auditor/`)
+**Best for**: Security researchers, auditors, and penetration testers
+- **Focus**: Comprehensive security tooling and analysis
+- **Includes**: All security tools, decompilers, static analysis, fuzzing tools
+- **Extensions**: Security-focused VS Code extensions
+- **Use case**: Deep security analysis, vulnerability research, comprehensive audits
+
+### **Minimal** (`.devcontainer/minimal/`)
+**Best for**: Quick development, CI/CD, lightweight workflows
+- **Focus**: Essential tools only, fast startup
+- **Includes**: Foundry, Hardhat, basic Solidity support
+- **Extensions**: Core development extensions only
+- **Use case**: Quick prototyping, CI/CD pipelines, resource-constrained environments
+
+### **Legacy The Red Guild** (`.devcontainer/legacy-theredguild/`)
+**Best for**: Users who need the full original experience
+- **Focus**: Complete toolchain with all features
+- **Includes**: Everything from the original devcontainer
+- **Extensions**: Full extension suite
+- **Use case**: Comprehensive development, learning, full-stack projects
+
+### **Legacy Minimal** (`.devcontainer/legacy-minimal/`)
+**Best for**: Users who want the minimal version from the legacy branch
+- **Focus**: Stripped-down version of the original
+- **Includes**: Essential tools only
+- **Extensions**: Basic extensions
+- **Use case**: Lightweight development, legacy project support
+
+## New Structure
+
+The project has been refactored to support multiple devcontainer configurations:
+
+```
+.devcontainer/
+├── auditor/           # Security-focused devcontainer
+├── minimal/           # Lightweight devcontainer
+├── legacy-theredguild/ # Full-featured legacy devcontainer
+└── legacy-minimal/    # Minimal legacy devcontainer
+```
+
+## Quick Start
+
+1. **Choose your variant** based on your needs (see above)
+2. **Navigate to the variant directory**: `cd .devcontainer/[variant-name]`
+3. **Open in VS Code**: `code .`
+4. **Reopen in Container**: Select the appropriate devcontainer when prompted
 
 ## Requirements
 
@@ -19,15 +73,19 @@ There's also a minimized version under the `minimal` branch.
 
 ## Kick-off
 
-1. Start the docker service, and make sure your user is in the `docker` group. Otherwise, add
+1. **Start the docker service**, and make sure your user is in the `docker` group. Otherwise, add
 yourself to it but you'll have to log in back again.
-2. Clone this repo, if you want a minimal version checkout `minimal`.
-3. Open the folder with **vscode** how you like. Running `code .` works well.
-4. Select **Reopen in Container** and wait. This will build the container volume.
-5. If this is your first time, you'll be prompted to press enter on a console log that triggers the
-terminal.
-6. If not you can go to the extensions section on your side, click the **Remote Explorer** tab and
-select the active devcontainer.
+2. **Clone this repo** and navigate to your preferred devcontainer variant:
+   ```bash
+   git clone <this-repo>
+   cd .devcontainer/[auditor|minimal|legacy-theredguild|legacy-minimal]
+   ```
+3. **Open the variant folder with VS Code**: Running `code .` works well.
+4. **Select "Reopen in Container"** and wait. This will build the container volume.
+5. **First time setup**: If this is your first time, you'll be prompted to press enter on a console log that triggers the terminal.
+6. **Subsequent uses**: Go to the extensions section, click the **Remote Explorer** tab and select the active devcontainer.
+
+> **Pro Tip**: Each variant has its own configuration, so you can switch between them by opening different variant folders in VS Code.
 
 ## Usage
 
@@ -39,6 +97,8 @@ can access several features:
 - You can even clone a new repository in a new volume based on the same devcontainer.
 
 ## Features Overview
+
+> **Note**: The features listed below are primarily for the **Legacy The Red Guild** variant. Each variant has its own tailored set of features. Check the specific variant's configuration for details.
 
 ### Extensions
 
@@ -267,6 +327,28 @@ Currently semgrep supports [Solidity](https://semgrep.dev/docs/language-support/
   ```shell
   $ semgrep --config p/smart-contracts path/to/your/project
   ```
+
+## Contributing
+
+### Adding New Variants
+
+To add a new devcontainer variant:
+
+1. **Create a new directory** in `.devcontainer/`
+2. **Add your configuration files**:
+   - `Dockerfile` (if custom build needed)
+   - `devcontainer.json` (required)
+   - Any additional configuration files
+3. **Update the CI workflow** in `.github/workflows/main.yml` to include your variant
+4. **Test locally** before submitting a PR
+5. **Update this README** to document your new variant
+
+### Structure Guidelines
+
+- **Naming**: Use descriptive, lowercase names (e.g., `auditor`, `minimal`)
+- **Configuration**: Keep variants focused on specific use cases
+- **Documentation**: Document what each variant is best for
+- **Testing**: Ensure your variant passes CI/CD checks
 
 ## How to audit your Dockerfile
 
