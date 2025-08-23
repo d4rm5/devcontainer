@@ -9,11 +9,6 @@ install the most popular tools, so they can all work seamlessly, and at the same
 by default. If you want to know more, and really want to take advante of this devcontainer read
 below.
 
-## New DevContainer Wizard
-
-Check our tool to generate the recommended devcontainer configuration based on your needs:
-- https://github.com/theredguild/devcontainer-wizard
-
 ## Available Devcontainer Variants
 
 We now offer multiple devcontainer configurations to suit different security and development needs:
