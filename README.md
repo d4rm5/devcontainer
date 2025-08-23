@@ -16,46 +16,59 @@ Check our tool to generate the recommended devcontainer configuration based on y
 
 ## Available Devcontainer Variants
 
-We now offer multiple devcontainer configurations to suit different needs:
+We now offer multiple devcontainer configurations to suit different security and development needs:
+
+### **Isolated** (`.devcontainer/isolated/`)
+**Best for**: Maximum security isolation, air-gapped environments
+- **Focus**: Complete isolation with read-only filesystem and network isolation
+- **Includes**: All security tools, fuzzing tools (Echidna, Medusa), static analysis
+- **Security**: Read-only filesystem, network isolation, capability dropping, tmpfs mounts
+- **Extensions**: Comprehensive Ethereum security bundle, audit tools, decompilers
+- **Use case**: High-security research, compliance requirements, isolated analysis
+
+### **Hardened** (`.devcontainer/hardened/`)
+**Best for**: Enhanced security with development flexibility
+- **Focus**: Security hardening with maintained network connectivity
+- **Includes**: Core security tools, Foundry, Hardhat, reduced tool set for security focus
+- **Security**: Capability dropping, security options, resource limits, DNS hardening
+- **Extensions**: Essential security extensions, development tools
+- **Use case**: Secure development, security-focused research, balanced security/functionality
 
 ### **Auditor** (`.devcontainer/auditor/`)
-**Best for**: Security researchers, auditors, and penetration testers
-- **Focus**: Comprehensive security tooling and analysis
-- **Includes**: All security tools, decompilers, static analysis, fuzzing tools
-- **Extensions**: Security-focused VS Code extensions
-- **Use case**: Deep security analysis, vulnerability research, comprehensive audits
+**Best for**: Smart contract auditors and security researchers
+- **Focus**: Specialized audit tooling and Docker-in-Docker support
+- **Includes**: Slither, Mythril, Crytic-compile, Foundry, Hardhat, Echidna
+- **Features**: Docker-in-Docker, specialized audit extensions, focused toolchain
+- **Extensions**: Solidity visual auditor, metrics, audit tools, GitLens
+- **Use case**: Comprehensive smart contract audits, security analysis, research workflows
 
 ### **Minimal** (`.devcontainer/minimal/`)
-**Best for**: Quick development, CI/CD, lightweight workflows
-- **Focus**: Essential tools only, fast startup
-- **Includes**: Foundry, Hardhat, basic Solidity support
+**Best for**: Essential development with basic security
+- **Focus**: Core tools only, streamlined development environment
+- **Includes**: Foundry, Hardhat, basic Solidity support, essential Python tools
+- **Security**: Basic hardening, capability dropping, IPv6 disabled
 - **Extensions**: Core development extensions only
-- **Use case**: Quick prototyping, CI/CD pipelines, resource-constrained environments
+- **Use case**: Quick prototyping, learning, basic development, resource-constrained environments
 
-### **Legacy The Red Guild** (`.devcontainer/legacy-theredguild/`)
-**Best for**: Users who need the full original experience
-- **Focus**: Complete toolchain with all features
-- **Includes**: Everything from the original devcontainer
-- **Extensions**: Full extension suite
-- **Use case**: Comprehensive development, learning, full-stack projects
+### **Legacy** (`.devcontainer/legacy/`)
+**Best for**: Complete toolchain with all features (original experience)
+- **Focus**: Full-featured development environment with comprehensive security tools
+- **Includes**: Complete tool suite, all security tools, fuzzing tools, analysis tools
+- **Security**: Comprehensive hardening, isolation features, security options
+- **Extensions**: Full extension suite, all security and development tools
+- **Use case**: Comprehensive development, learning, full-stack projects, research
 
-### **Legacy Minimal** (`.devcontainer/legacy-minimal/`)
-**Best for**: Users who want the minimal version from the legacy branch
-- **Focus**: Stripped-down version of the original
-- **Includes**: Essential tools only
-- **Extensions**: Basic extensions
-- **Use case**: Lightweight development, legacy project support
+## Project Structure
 
-## New Structure
-
-The project has been refactored to support multiple devcontainer configurations:
+The project supports multiple devcontainer configurations for different use cases:
 
 ```
 .devcontainer/
-├── auditor/           # Security-focused devcontainer
-├── minimal/           # Lightweight devcontainer
-├── legacy-theredguild/ # Full-featured legacy devcontainer
-└── legacy-minimal/    # Minimal legacy devcontainer
+├── isolated/          # Maximum security isolation
+├── hardened/          # Enhanced security with flexibility
+├── auditor/           # Specialized audit environment
+├── minimal/           # Essential tools only
+└── legacy/            # Complete toolchain (original)
 ```
 
 ## Quick Start
